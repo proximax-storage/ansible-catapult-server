@@ -125,7 +125,7 @@ tree /tmp/data
   └── block-properties-file.properties
 ```
 
-The `data` folder should be copied to your `host` server and defined in the role variable `catapult_data_directory` as shown in the next section.
+The `data` folder should be copied to your `target host` server and defined in the role variable `catapult_data_directory` as shown in the next section.
 
 ## Basic Setup
 
