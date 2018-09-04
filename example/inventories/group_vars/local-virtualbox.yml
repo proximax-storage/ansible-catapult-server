@@ -1,0 +1,5 @@
+---
+# Vagrant auto generated SSH key
+ansible_ssh_private_key_file: ./vagrant/.vagrant/machines/default/virtualbox/private_key
+catapult_user: vagrant
+catapult_group: vagrant

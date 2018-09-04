@@ -1,0 +1,26 @@
+{
+  "_info": "this file contains a list of all trusted peers and can be shared",
+  "knownPeers": [
+{% for peer in known_peers %}
+  {
+    "publicKey": "{{ peer['public_key'] }}",
+    "endpoint": {
+      "host": "{{ peer['endpoint.host'] }}",
+      "port": {{ peer['endpoint.port'] }}
+    },
+    "metadata": {
+      "name": "{{ peer['metadata.name'] }}",
+      "roles": "{{ peer['metadata.roles'] }}"
+    }
+{% if loop.last %}
+  }
+{% else %}
+  },
+{% endif %}
+{% endfor %}
+  ]
+}
+
+
+
+

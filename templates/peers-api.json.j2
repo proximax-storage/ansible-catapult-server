@@ -1,0 +1,22 @@
+{
+  "_info": "this file contains a list of api peers",
+  "knownPeers": [
+{% for peer in known_api_peers %}
+  {
+    "publicKey": "{{ peer['public_key'] }}",
+    "endpoint": {
+      "host": "{{ peer['endpoint.host'] }}",
+      "port": {{ peer['endpoint.port'] }}
+    },
+    "metadata": {
+      "name": "{{ peer['metadata.name'] }}",
+      "roles": "{{ peer['metadata.roles'] }}"
+    }
+{% if loop.last %}
+  }
+{% else %}
+  },
+{% endif %}
+{% endfor %}
+  ]
+}

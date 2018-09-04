@@ -1,0 +1,14 @@
+version: "3.6"
+services:
+  catapult:
+    # Downloads Catapult Server from specified Docker repo
+    image: {{ catapult_server_repository_name }}:{{ catapult_server_docker_tag }}
+    ports:
+      - 7902:7902
+      - 7900:7900
+      - 7901:7901
+    volumes:
+      - {{ catapult_config_directory }}:/catapultconfig
+      - {{ catapult_data_directory }}:/data:rw
+    restart: always
+    command: sh -c "/catapult/bin/catapult.server /catapultconfig"

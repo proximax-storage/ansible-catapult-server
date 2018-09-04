@@ -1,0 +1,5 @@
+{% set combined_pt_config = default_pt_config | combine(pt_config, recursive=true) -%}
+[partialtransactions]
+
+cacheMaxResponseSize = {{ combined_pt_config['cache_max_response_size'] }}
+cacheMaxSize = {{ combined_pt_config['cache_max_size'] }}

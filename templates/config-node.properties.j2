@@ -1,0 +1,86 @@
+{% set combined_node_config = default_node_config | combine(node_config, recursive=true) -%}
+[node]
+
+port = {{ combined_node_config['node_port'] }}
+apiPort = {{ combined_node_config['node_api_port'] }}
+shouldAllowAddressReuse = {{ combined_node_config['should_allow_address_reuse'] | lower }}
+shouldUseSingleThreadPool = {{ combined_node_config['should_use_single_thread_pool'] | lower }}
+shouldUseCacheDatabaseStorage = {{ combined_node_config['should_use_cache_database_storage'] | lower }}
+
+shouldEnableTransactionSpamThrottling = {{ combined_node_config['should_enable_transaction_spam_throttling'] | lower }}
+transactionSpamThrottlingMaxBoostFee = {{ combined_node_config['transaction_spam_throttling_max_boost_fee'] }}
+
+maxBlocksPerSyncAttempt = {{ combined_node_config['max_blocks_per_sync_attempt'] }}
+maxChainBytesPerSyncAttempt = {{ combined_node_config['max_chain_bytes_per_sync_attempt'] }}
+
+shortLivedCacheTransactionDuration = {{ combined_node_config['short_lived_cache_transaction_duration'] }}
+shortLivedCacheBlockDuration = {{ combined_node_config['short_lived_cache_block_duration'] }}
+shortLivedCachePruneInterval = {{ combined_node_config['short_lived_cache_prune_interval'] }}
+shortLivedCacheMaxSize = {{ combined_node_config['short_lived_cache_max_size'] }}
+
+unconfirmedTransactionsCacheMaxResponseSize = {{ combined_node_config['unconfirmed_transactions_cache_max_response_size'] }}
+unconfirmedTransactionsCacheMaxSize = {{ combined_node_config['unconfirmed_transactions_cache_max_size'] }}
+
+connectTimeout = {{ combined_node_config['connect_timeout'] }}
+syncTimeout = {{ combined_node_config['sync_timeout'] }}
+
+socketWorkingBufferSize = {{ combined_node_config['socket_working_buffer_size'] }}
+socketWorkingBufferSensitivity = {{ combined_node_config['socket_working_buffer_sensitivity'] }}
+maxPacketDataSize = {{ combined_node_config['max_packet_data_size'] }}
+
+blockDisruptorSize = {{ combined_node_config['block_disruptor_size'] }}
+blockElementTraceInterval = {{ combined_node_config['block_element_trace_interval'] }}
+transactionDisruptorSize = {{ combined_node_config['transaction_disruptor_size'] }}
+transactionElementTraceInterval = {{ combined_node_config['transaction_element_trace_interval'] }}
+
+shouldAbortWhenDispatcherIsFull = {{ combined_node_config['should_abort_when_dispatcher_is_full'] | lower }}
+shouldAuditDispatcherInputs = {{ combined_node_config['should_audit_dispatcher_inputs'] | lower }}
+shouldPrecomputeTransactionAddresses = {{ combined_node_config['should_precompute_transaction_addresses'] | lower }}
+
+outgoingSecurityMode = {{ combined_node_config['outgoing_security_mode'] }}
+incomingSecurityModes = {{ combined_node_config['incoming_security_modes'] }}
+
+[localnode]
+
+host = {{ combined_node_config['localnode_host'] }}
+friendlyName = {{ combined_node_config['localnode_friendly_name'] }}
+version = {{ combined_node_config['localnode_version'] }}
+roles = {{ combined_node_config['localnode_roles'] }}
+
+[outgoing_connections]
+
+maxConnections = {{ combined_node_config['outgoing_max_connections'] }}
+maxConnectionAge = {{ combined_node_config['outgoing_max_connection_age'] }}
+
+[incoming_connections]
+
+maxConnections = {{ combined_node_config['incoming_max_connections'] }}
+maxConnectionAge = {{ combined_node_config['incoming_max_connection_age'] }}
+backlogSize = {{ combined_node_config['incoming_backlog_size'] }}
+
+[extensions]
+
+# api extensions
+#   (in order for precomputation to work in all cases when enabled, `addressextraction` must be registered first
+#    because it precomputes addresses of rolled-back transactions)
+extension.addressextraction = {{ combined_node_config['extension_addressextraction'] | lower }}
+extension.mongo = {{ combined_node_config['extension_mongo'] | lower }}
+extension.partialtransaction = {{ combined_node_config['extension_partialtransaction'] | lower }}
+extension.zeromq = {{ combined_node_config['extension_zeromq'] | lower }}
+
+# p2p extensions
+extension.eventsource = {{ combined_node_config['extension_eventsource'] | lower }}
+extension.harvesting = {{ combined_node_config['extension_harvesting'] | lower }}
+extension.syncsource = {{ combined_node_config['extension_syncsource'] | lower }}
+
+# common extensions
+extension.diagnostics = {{ combined_node_config['extension_diagnostics'] | lower }}
+extension.filechain = {{ combined_node_config['extension_filechain'] | lower }}
+extension.hashcache = {{ combined_node_config['extension_hashcache'] | lower }}
+extension.networkheight = {{ combined_node_config['extension_networkheight'] | lower }}
+extension.nodediscovery = {{ combined_node_config['extension_nodediscovery'] | lower }}
+extension.packetserver = {{ combined_node_config['extension_packetserver'] | lower }}
+extension.sync = {{ combined_node_config['extension_sync'] | lower }}
+extension.timesync = {{ combined_node_config['extension_timesync'] | lower }}
+extension.transactionsink = {{ combined_node_config['extension_transactionsink'] | lower }}
+extension.unbondedpruning = {{ combined_node_config['extension_unbondedpruning'] | lower }}

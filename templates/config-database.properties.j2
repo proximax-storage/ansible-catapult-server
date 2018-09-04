@@ -1,0 +1,14 @@
+{% set combined_db_config = default_db_config | combine(db_config, recursive=true) -%}
+[database]
+
+databaseUri = {{ combined_db_config['database_uri'] }}
+databaseName = {{ combined_db_config['database_name'] }}
+maxWriterThreads = {{ combined_db_config['max_writer_threads'] }}
+
+[plugins]
+
+catapult.mongo.plugins.aggregate = {{ combined_db_config['catapult_mongo_plugins_aggregate'] | lower }}
+catapult.mongo.plugins.lock = {{ combined_db_config['catapult_mongo_plugins_lock'] | lower }}
+catapult.mongo.plugins.multisig = {{ combined_db_config['catapult_mongo_plugins_multisig'] | lower }}
+catapult.mongo.plugins.namespace = {{ combined_db_config['catapult_mongo_plugins_namespace'] | lower }}
+catapult.mongo.plugins.transfer = {{ combined_db_config['catapult_mongo_plugins_transfer'] | lower }}

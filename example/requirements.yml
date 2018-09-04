@@ -1,0 +1,11 @@
+---
+#------------------------------------------------------------
+# Install third-party Ansible Galaxy roles
+# Run `ansible-galaxy install --roles-path=roles -r requirements.yml`
+#------------------------------------------------------------
+- src: https://github.com/mongrelion/ansible-role-docker.git
+  name: ansible-role-docker
+
+- src: https://github.com/proximax-storage/ansible-catapult-server.git
+  name: ansible-catapult-server
+

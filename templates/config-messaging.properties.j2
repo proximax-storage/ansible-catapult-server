@@ -1,0 +1,4 @@
+{% set combined_msg_config = default_msg_config | combine(msg_config, recursive=true) -%}
+[messaging]
+
+subscriberPort = {{ combined_msg_config['subscriber_port'] }}

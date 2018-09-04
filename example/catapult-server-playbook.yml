@@ -1,0 +1,13 @@
+#------------------------------------------
+# Simple playbook for debugging ndoes
+#------------------------------------------
+---
+  - hosts: all
+    become: true
+    roles:
+      - role: ansible-role-docker
+        vars:
+            docker_version: "latest"
+            docker_users: ["ubuntu"]
+      - role: ansible-catapult-server
+        tags: catapult

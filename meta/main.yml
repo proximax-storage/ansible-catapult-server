@@ -1,0 +1,22 @@
+---
+allow_duplicates: yes
+
+galaxy_info:
+  author: Carlo Cayos
+  description: Catapult Server for Linux
+  role_name: catapult-server
+  company: "ProximaX"
+  license: "Apache License 2.0"
+  min_ansible_version: 2.5.1
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  galaxy_tags:
+    - catapult
+    - catapultserver
+    - nem
+  categories:
+  - system
+
+dependencies: []

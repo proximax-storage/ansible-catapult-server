@@ -1,0 +1,4 @@
+{% set combined_timesync_config = default_timesync_config | combine(timesync_config, recursive=true) -%}
+[timesynchronization]
+
+maxNodes = {{ combined_timesync_config['max_nodes'] }}

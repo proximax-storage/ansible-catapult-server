@@ -1,0 +1,10 @@
+#------------------------------------------
+# Simple playbook for debugging ndoes
+#------------------------------------------
+---
+  - hosts: all
+    become: true
+    tasks:
+      - name: Debug
+        debug:
+          msg: "Hello World"

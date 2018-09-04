@@ -1,0 +1,23 @@
+{% set combined_log_config = default_log_config | combine(log_config, recursive=true) -%}
+[console]
+
+sinkType = {{ combined_log_config['console_sink_type'] }}
+level = {{ combined_log_config['console_level'] }}
+colorMode = {{ combined_log_config['console_color_mode'] }}
+
+[console.component.levels]
+
+# e.g. to log more verbose messages about the 'net' component, uncomment
+# net = Debug
+
+[file]
+
+sinkType = {{ combined_log_config['file_sink_type'] }}
+level = {{ combined_log_config['file_level'] }}
+directory = {{ combined_log_config['file_directory'] }}
+filePattern = {{ combined_log_config['file_pattern'] }}
+rotationSize = {{ combined_log_config['file_rotation_size'] }}
+maxTotalSize = {{ combined_log_config['file_max_total_size'] }}
+minFreeSpace = {{ combined_log_config['file_min_free_space'] }}
+
+[file.component.levels]

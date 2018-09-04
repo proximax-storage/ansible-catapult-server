@@ -1,0 +1,66 @@
+{% set combined_task_config = default_task_config | combine(task_config, recursive=true) -%}
+[age peers task for service Api Writers]
+startDelay = {{ combined_task_config['age_peers_task_api_writers_start_delay'] }}
+repeatDelay = {{ combined_task_config['age_peers_task_api_writers_repeat_delay'] }}
+
+[age peers task for service Readers]
+startDelay = {{ combined_task_config['age_peers_task_service_readers_start_delay'] }}
+repeatDelay = {{ combined_task_config['age_peers_task_service_readers_repeat_delay'] }}
+
+[batch partial transaction task]
+startDelay = {{ combined_task_config['batch_partial_transaction_task_start_delay'] }}
+repeatDelay = {{ combined_task_config['batch_partial_transaction_task_repeat_delay'] }}
+
+[batch transaction task]
+startDelay = {{ combined_task_config['batch_transaction_task_start_delay'] }}
+repeatDelay = {{ combined_task_config['batch_transaction_task_repeat_delay'] }}
+
+[connect peers task for service Pt]
+startDelay = {{ combined_task_config['connect_peers_task_service_pt_start_delay'] }}
+repeatDelay = {{ combined_task_config['connect_peers_task_service_pt_repeat_delay'] }}
+
+[connect peers task for service Sync]
+startDelay = {{ combined_task_config['connect_peers_task_service_sync_start_delay'] }}
+repeatDelay = {{ combined_task_config['connect_peers_task_service_sync_repeat_delay'] }}
+
+[harvesting task]
+startDelay = {{ combined_task_config['harvesting_task_start_delay'] }}
+repeatDelay = {{ combined_task_config['harvesting_task_repeat_delay'] }}
+
+[logging task]
+startDelay = {{ combined_task_config['logging_task_start_delay'] }}
+repeatDelay = {{ combined_task_config['logging_task_repeat_delay'] }}
+
+[network chain height detection]
+startDelay = {{ combined_task_config['network_chain_height_detection_start_delay'] }}
+repeatDelay = {{ combined_task_config['network_chain_height_detection_repeat_delay'] }}
+
+[node discovery peers task]
+startDelay = {{ combined_task_config['node_discovery_peers_task_start_delay'] }}
+minDelay = {{ combined_task_config['node_discovery_peers_task_min_delay'] }}
+maxDelay = {{ combined_task_config['node_discovery_peers_task_max_delay'] }}
+numPhaseOneRounds = {{ combined_task_config['node_discovery_peers_task_num_phase_one_rounds'] }}
+numTransitionRounds = {{ combined_task_config['node_discovery_peers_task_num_transition_rounds'] }}
+
+[node discovery ping task]
+startDelay = {{ combined_task_config['node_discovery_ping_task_start_delay'] }}
+repeatDelay = {{ combined_task_config['node_discovery_ping_task_repeat_delay'] }}
+
+[pull partial transactions task]
+startDelay = {{ combined_task_config['pull_partial_transactions_task_start_delay'] }}
+repeatDelay = {{ combined_task_config['pull_partial_transactions_task_repeat_delay'] }}
+
+[pull unconfirmed transactions task]
+startDelay = {{ combined_task_config['pull_unconfirmed_transactions_task_start_delay'] }}
+repeatDelay = {{ combined_task_config['pull_unconfirmed_transactions_task_repeat_delay'] }}
+
+[synchronizer task]
+startDelay = {{ combined_task_config['synchronizer_task_start_delay'] }}
+repeatDelay = {{ combined_task_config['synchronizer_task_repeat_delay'] }}
+
+[time synchronization task]
+startDelay = {{ combined_task_config['time_synchronization_task_start_delay'] }}
+minDelay = {{ combined_task_config['time_synchronization_task_min_delay'] }}
+maxDelay = {{ combined_task_config['time_synchronization_task_max_delay'] }}
+numPhaseOneRounds = {{ combined_task_config['time_synchronization_task_num_phase_one_rounds'] }}
+numTransitionRounds = {{ combined_task_config['time_synchronization_task_num_transition_rounds'] }}

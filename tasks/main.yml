@@ -1,0 +1,64 @@
+#------------------------------------------------
+# Step 1: Create Catapult Server directories
+#------------------------------------------------
+- name: Create directory for catapult-server config resources
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ catapult_user }}"
+    group: "{{ catapult_group }}"
+    recurse: yes
+    mode: 0744
+  with_items:
+  - "{{ catapult_config_directory }}/resources"
+
+#------------------------------------------------
+# Pull the Catapult-Server Docker image from a Docker registry
+#------------------------------------------------
+- name: "Docker pull Catapult Server image"
+  docker_image:
+    name: "{{ catapult_server_repository_name }}"
+    tag: "{{ catapult_server_docker_tag }}"
+
+#------------------------------------------------
+# Create scripts and configuration files from populated Jinja2 templates
+#------------------------------------------------
+- name: Docker compose file for running Catapult Server container
+  template:
+    src: "docker-compose.yml.j2"
+    dest: "{{ catapult_config_directory }}/docker-compose.yml"
+    owner: "{{ catapult_user }}"
+    group: "{{ catapult_group }}"
+    mode: u+r
+
+- name: Generate Catapult Server Configuration Files
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ catapult_config_directory }}/resources/{{ item }}"
+    owner: "{{ catapult_user }}"
+    group: "{{ catapult_group }}"
+    mode: u+r
+  with_items:
+  - config-database.properties
+  - config-harvesting.properties
+  - config-logging.properties
+  - config-messaging.properties
+  - config-network.properties
+  - config-node.properties
+  - config-pt.properties
+  - config-task.properties
+  - config-timesync.properties
+  - config-user.properties
+  - peers-api.json
+  - peers-p2p.json
+
+#------------------------------------------------
+# TODO: If running Catapult-Server Peer Mode
+#------------------------------------------------
+
+
+#------------------------------------------------
+# TODO: If running Catapult-Server API Mode
+# Also run mongodb and catapult-rest (NodeJS)
+#------------------------------------------------
