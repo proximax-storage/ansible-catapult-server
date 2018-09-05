@@ -22,7 +22,7 @@ Run `ansible-galaxy` install to download the role from Github
 ansible-galaxy install -r requirements.yml
 ```
 
-## Pre-requisites
+## Prerequisites
 
 The NEM Address and Nemesis block must be generated first before running Catapult Server.
 
@@ -46,9 +46,6 @@ dd if=/dev/zero of=/tmp/data/00000/hashes.dat bs=1 count=64
 ```
 
 Create a file `/tmp/data/block-properties-file.properties`. Example below, replace it with your own generated addresses.
-
-<details><summary>Click here to expand block-properties-file.properties</summary>
-<p>
 
 ```text
 [nemesis]
@@ -114,8 +111,6 @@ isTransferable = true
 isSupplyMutable = true
 isLevyMutable = false
 ```
-</p>
-</details>
 
 Now, generate the nemesis block.
 ```
@@ -130,7 +125,7 @@ tree /tmp/data
   └── block-properties-file.properties
 ```
 
-The `data` folder should be copied to your `host` server and defined in the role variable `catapult_data_directory` as shown in the next section.
+The `data` folder should be copied to your `target host` server and defined in the role variable `catapult_data_directory` as shown in the next section.
 
 ## Basic Setup
 
