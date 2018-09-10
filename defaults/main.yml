@@ -43,7 +43,7 @@ default_log_config:
   console_color_mode: Ansi
 
   # [file]
-  file_sink_type: Async
+  file_sink_type: Sync
   file_level: Debug
   file_directory: logs
   file_pattern: catapult_server_%4N.log
@@ -98,12 +98,12 @@ default_net_config:
   max_name_size: 64
   max_namespace_duration: 365d
   namespace_grace_period_duration: 0d
-  reserved_root_namespace_names: xem, nem, user, account, org, com, biz, net, edu, mil, gov, info, prx, xpx, xarcade, xar, proximax, prc, storage
+  reserved_root_namespace_names: xem, nem, user, account, org, com, biz, net, edu, mil, gov, info
 
   # default mijin-test properties
   namespace_rental_fee_sink_public_key: 75865D6EB7780EDEFF34E9E217ACEAA4D5B97B0023252C3947D3C88C151ECC09
-  root_namespace_rental_fee_per_block: 1'000'000
-  child_namespace_rental_fee: 100'000'000
+  root_namespace_rental_fee_per_block: 100'000
+  child_namespace_rental_fee: 10'000'000
   max_child_namespaces: 500
   max_mosaics_per_account: 10'000
   max_mosaic_duration: 3650d
@@ -113,7 +113,7 @@ default_net_config:
 
   # default mijin-test properties
   mosaic_rental_fee_sink_public_key: 0B937E93B6EAB333550B70FF4FD31AF4F7D747A64178FAF86E56EEA040D38011
-  mosaic_rental_fee: 500'000'000
+  mosaic_rental_fee: 50'000'000
 
   # [plugin:catapult.plugins.transfer]
   max_message_size: 1024
@@ -155,7 +155,7 @@ default_node_config:
   transaction_disruptor_size: 16384
   transaction_element_trace_interval: 10
   should_abort_when_dispatcher_is_full: true
-  should_audit_dispatcher_inputs: false
+  should_audit_dispatcher_inputs: true
   should_precompute_transaction_addresses: false
   outgoing_security_mode: None
   incoming_security_modes: None

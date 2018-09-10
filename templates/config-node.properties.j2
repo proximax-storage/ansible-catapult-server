@@ -68,10 +68,18 @@ extension.mongo = {{ combined_node_config['extension_mongo'] | lower }}
 extension.partialtransaction = {{ combined_node_config['extension_partialtransaction'] | lower }}
 extension.zeromq = {{ combined_node_config['extension_zeromq'] | lower }}
 
+
 # p2p extensions
+{% if combined_node_config['localnode_roles'] == "Peer" %}
 extension.eventsource = {{ combined_node_config['extension_eventsource'] | lower }}
 extension.harvesting = {{ combined_node_config['extension_harvesting'] | lower }}
 extension.syncsource = {{ combined_node_config['extension_syncsource'] | lower }}
+{% else %}
+# extension.eventsource = {{ combined_node_config['extension_eventsource'] | lower }}
+# extension.harvesting = {{ combined_node_config['extension_harvesting'] | lower }}
+# extension.syncsource = {{ combined_node_config['extension_syncsource'] | lower }}
+{% endif %}
+
 
 # common extensions
 extension.diagnostics = {{ combined_node_config['extension_diagnostics'] | lower }}
