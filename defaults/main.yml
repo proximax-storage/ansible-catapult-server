@@ -292,7 +292,7 @@ user_config: {}
 default_user_config:
   node_boot_private_key: 9104901B3712F03E5BE15269AD963C9F55960221F1AA1896B18EBFFE4BC9F194
   data_directory: /data
-  plugins_directory: /catapult/bin
+  plugins_directory:
 
 #------------------------------------
 # peers-api.json.j2
