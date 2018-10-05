@@ -6,6 +6,7 @@ from the specified Docker registry.
 
 The tested platforms are:
 
+* Ubuntu 16.04
 * Ubuntu 18.04
 
 ## Usage
