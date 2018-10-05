@@ -12,6 +12,7 @@
     mode: 0744
   with_items:
   - "{{ catapult_config_directory }}/resources"
+  - "{{ catapult_data_directory }}"
 
 #------------------------------------------------
 # Pull the Catapult-Server Docker image from a Docker registry
@@ -24,14 +25,6 @@
 #------------------------------------------------
 # Create scripts and configuration files from populated Jinja2 templates
 #------------------------------------------------
-- name: Docker compose file for running Catapult Server container
-  template:
-    src: "docker-compose.yml.j2"
-    dest: "{{ catapult_config_directory }}/docker-compose.yml"
-    owner: "{{ catapult_user }}"
-    group: "{{ catapult_group }}"
-    mode: u+r
-
 - name: Generate Catapult Server Configuration Files
   template:
     src: "{{ item }}.j2"
@@ -54,11 +47,50 @@
   - peers-p2p.json
 
 #------------------------------------------------
-# TODO: If running Catapult-Server Peer Mode
+# If running Catapult-Server PEER Mode
 #------------------------------------------------
+- name: Docker compose file for running Catapult Server container
+  template:
+    src: "docker-compose.yml.j2"
+    dest: "{{ catapult_config_directory }}/docker-compose.yml"
+    owner: "{{ catapult_user }}"
+    group: "{{ catapult_group }}"
+    mode: u+r
+  when: node_config['localnode_roles'] != "Api"
 
+#------------------------------------------------
+# If running Catapult-Server API Mode
+#------------------------------------------------
+- name: Catapult API Node - create directory for catapult-server API Node
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ catapult_user }}"
+    group: "{{ catapult_group }}"
+    recurse: yes
+    mode: 0744
+  with_items:
+  - "{{ mongodb_data_directory }}"
+  - "{{ catapult_rest_user_config }}"
+  when: node_config['localnode_roles'] == "Api"
 
-#------------------------------------------------
-# TODO: If running Catapult-Server API Mode
-# Also run mongodb and catapult-rest (NodeJS)
-#------------------------------------------------
+- name: Catapult API Node - Docker compose file for Catapult Server API Node
+  template:
+    src: "docker-compose-api-node.yml.j2"
+    dest: "{{ catapult_config_directory }}/docker-compose.yml"
+    owner: "{{ catapult_user }}"
+    group: "{{ catapult_group }}"
+    mode: u+r
+  when: node_config['localnode_roles'] == "Api"
+
+- name: Catapult API Node - generate Catapult REST JSON configuration file
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ catapult_rest_user_config }}/{{ item }}"
+    owner: "{{ catapult_user }}"
+    group: "{{ catapult_group }}"
+    mode: u+r
+  with_items:
+  - rest.json
+  when: node_config['localnode_roles'] == "Api"

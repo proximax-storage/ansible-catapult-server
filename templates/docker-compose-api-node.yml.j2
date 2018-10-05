@@ -1,0 +1,35 @@
+version: "3.6"
+services:
+  db:
+    image: mongo
+    command: bash -c "mongod --dbpath=/dbdata --bind_ip=db"
+    stop_signal: SIGINT
+    volumes:
+    - {{ mongodb_data_directory }}:/dbdata:rw
+
+  catapult-api-node:
+    # Downloads Catapult Server from specified Docker repo
+    image: {{ catapult_server_repository_name }}:{{ catapult_server_docker_tag }}
+    ports:
+      - 7902:7902
+      - 7900:7900
+      - 7901:7901
+    volumes:
+      - {{ catapult_config_directory }}:/catapultconfig
+      - {{ catapult_data_directory }}:/data:rw
+    restart: always
+    command: sh -c "/catapult/bin/catapult.server /catapultconfig"
+
+  rest-gateway:
+    image: techbureau/catapult-rest-server:1.0.7
+    ports:
+    - "3000:3000"
+    volumes:
+    - {{ catapult_rest_user_config }}:/userconfig/
+    command: ash -c "npm start resources/rest.json /userconfig/rest.json"
+
+  block-explorer:
+    image: techbureau/catapult-block-explorer
+    command: ["python", "-m", "http.server", "8000"]
+    ports:
+    - "8000:8000"

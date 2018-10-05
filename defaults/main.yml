@@ -10,6 +10,20 @@ catapult_server_repository_name: techbureau/catapult-server
 catapult_server_docker_tag: gcc-0.1.0.2
 
 #------------------------------------
+# API Node
+# docker-compose-api-node.yml.j2
+#------------------------------------
+mongodb_data_directory: /opt/catapult-config/mongodata
+catapult_rest_user_config: /opt/catapult-config/restuserconfig
+
+#------------------------------------
+# API Node
+# rest.json.j2
+#------------------------------------
+#catapult_rest_client_private_key: 0000000000000000000000000000000000000000000000000000000000000000
+#catapult_api_node_public_key: 0000000000000000000000000000000000000000000000000000000000000000
+
+#------------------------------------
 # config-database.properties.j2 - default_db_config['key']
 #------------------------------------
 db_config: {}
@@ -65,8 +79,8 @@ net_config: {}
 # [network]
 default_net_config:
   identifier: mijin-test
-  nemesis_generation_hash_public_key: 0F892E628D7AFAA4DB3530EB12305FEE30F89FEA5B9084DDB50FD1AB21328BCE
-  nemesis_signer_public_key: 935F5D0AEEA7A5C64AAC6C236225C580E3851B4767CE33D4F7B57E815FCC51FC
+#  nemesis_generation_hash_public_key: 0F892E628D7AFAA4DB3530EB12305FEE30F89FEA5B9084DDB50FD1AB21328BCE
+#  nemesis_signer_public_key: 935F5D0AEEA7A5C64AAC6C236225C580E3851B4767CE33D4F7B57E815FCC51FC
 
   # [chain]
   block_generation_target_time: 15s
@@ -101,7 +115,7 @@ default_net_config:
   reserved_root_namespace_names: xem, nem, user, account, org, com, biz, net, edu, mil, gov, info
 
   # default mijin-test properties
-  namespace_rental_fee_sink_public_key: 75865D6EB7780EDEFF34E9E217ACEAA4D5B97B0023252C3947D3C88C151ECC09
+#  namespace_rental_fee_sink_public_key: 75865D6EB7780EDEFF34E9E217ACEAA4D5B97B0023252C3947D3C88C151ECC09
   root_namespace_rental_fee_per_block: 100'000
   child_namespace_rental_fee: 10'000'000
   max_child_namespaces: 500
@@ -112,7 +126,7 @@ default_net_config:
   max_mosaic_divisible_units: 9'000'000'000'000'000
 
   # default mijin-test properties
-  mosaic_rental_fee_sink_public_key: 0B937E93B6EAB333550B70FF4FD31AF4F7D747A64178FAF86E56EEA040D38011
+#  mosaic_rental_fee_sink_public_key: 0B937E93B6EAB333550B70FF4FD31AF4F7D747A64178FAF86E56EEA040D38011
   mosaic_rental_fee: 50'000'000
 
   # [plugin:catapult.plugins.transfer]
@@ -290,37 +304,37 @@ default_timesync_config:
 #------------------------------------
 user_config: {}
 default_user_config:
-  node_boot_private_key: 9104901B3712F03E5BE15269AD963C9F55960221F1AA1896B18EBFFE4BC9F194
+#  node_boot_private_key: 9104901B3712F03E5BE15269AD963C9F55960221F1AA1896B18EBFFE4BC9F194
   data_directory: /data
   plugins_directory:
 
 #------------------------------------
 # peers-api.json.j2
 #------------------------------------
-known_api_peers: [
-{
-  'public_key':'912367524318862FEE43220C8BF8A4CE31565525168D41F708EDFD671BD60BF3',
-  'endpoint.host':'127.0.0.3',
-  'endpoint.port':'7900',
-  'metadata.name':'apinode',
-  'metadata.roles':'Api'
-}]
+#known_api_peers: [
+#{
+#  'public_key':'912367524318862FEE43220C8BF8A4CE31565525168D41F708EDFD671BD60BF3',
+#  'endpoint.host':'127.0.0.3',
+#  'endpoint.port':'7900',
+#  'metadata.name':'apinode',
+#  'metadata.roles':'Api'
+#}]
 
 #------------------------------------
 # peers-p2p.json.j2
 #------------------------------------
-known_peers: [
-{
-  'public_key':'8E22B040EA904C441EA9BD666726239BA9D0A552BF087A28A8D7C183480C8385',
-  'endpoint.host':'127.0.0.1',
-  'endpoint.port':'7900',
-  'metadata.name':'peernode1',
-    'metadata.roles':'Peer'
-},
-{
-  'public_key':'520C80412AC1C665DF0080F9B9BC15E6FA971D547AD57C0C6318EEEDCE53EF78',
-  'endpoint.host':'127.0.0.2',
-  'endpoint.port':'7900',
-  'metadata.name':'peernode2',
-  'metadata.roles':'Peer'
-}]
+#known_peers: [
+#{
+#  'public_key':'8E22B040EA904C441EA9BD666726239BA9D0A552BF087A28A8D7C183480C8385',
+#  'endpoint.host':'127.0.0.1',
+#  'endpoint.port':'7900',
+#  'metadata.name':'peernode1',
+#    'metadata.roles':'Peer'
+#},
+#{
+#  'public_key':'520C80412AC1C665DF0080F9B9BC15E6FA971D547AD57C0C6318EEEDCE53EF78',
+#  'endpoint.host':'127.0.0.2',
+#  'endpoint.port':'7900',
+#  'metadata.name':'peernode2',
+#  'metadata.roles':'Peer'
+#}]
