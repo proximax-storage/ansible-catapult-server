@@ -56,7 +56,7 @@
     owner: "{{ catapult_user }}"
     group: "{{ catapult_group }}"
     mode: u+r
-  when: node_config['localnode_roles'] != "Api"
+  when: node_config['localnode_roles'] is not defined or node_config['localnode_roles'] != "Api"
 
 #------------------------------------------------
 # If running Catapult-Server API Mode
@@ -73,7 +73,7 @@
   with_items:
   - "{{ mongodb_data_directory }}"
   - "{{ catapult_rest_user_config }}"
-  when: node_config['localnode_roles'] == "Api"
+  when: node_config['localnode_roles'] is defined and node_config['localnode_roles'] == "Api"
 
 - name: Catapult API Node - Docker compose file for Catapult Server API Node
   template:
@@ -82,7 +82,7 @@
     owner: "{{ catapult_user }}"
     group: "{{ catapult_group }}"
     mode: u+r
-  when: node_config['localnode_roles'] == "Api"
+  when: node_config['localnode_roles'] is defined and node_config['localnode_roles'] == "Api"
 
 - name: Catapult API Node - generate Catapult REST JSON configuration file
   template:
@@ -93,4 +93,4 @@
     mode: u+r
   with_items:
   - rest.json
-  when: node_config['localnode_roles'] == "Api"
+  when: node_config['localnode_roles'] is defined and node_config['localnode_roles'] == "Api"
